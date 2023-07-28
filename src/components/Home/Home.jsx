@@ -2,6 +2,7 @@ import React from 'react'
 import "./Home.css"
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import TopBar from '../TopBar/TopBar'
 
 const Home = () => {
     const handleClick = () => {
@@ -11,6 +12,7 @@ const Home = () => {
 
     return (
         <div className="main-div">
+            <TopBar />
             <header className="App-header">
             <h1>FulboApp</h1>
             <Stack direction="row" spacing={2}>
