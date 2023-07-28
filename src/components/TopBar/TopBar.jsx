@@ -1,9 +1,11 @@
 import { AppBar, Button, IconButton, Toolbar, Typography, Backdrop, Modal, Fade, Box } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
-import React, { useState } from 'react'
+import React from 'react'
 import './TopBar.css'
-// import LoginForm from './LoginForm'
-// import RegistrationForm from './RegistrationForm'
+import LoginForm from './LoginForm'
+import RegistrationForm from './RegistrationForm'
+import { useTheme } from '@mui/material/styles'
+import { useMediaQuery } from '@mui/material'
 
 const TopBar = () => {
     const SXAPPBAR = {
@@ -16,22 +18,28 @@ const TopBar = () => {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 400,
+        width: "50%",
         bgcolor: 'background.paper',
         border: '2px solid #000',
+        borderRadius: 4,
         boxShadow: 24,
         p: 4,
-    };
+    }
 
     const [open, setOpen] = React.useState(false);
     const [modalForm, setForm] = React.useState(null);
+    const theme = useTheme();
+
+    const mobileMatch = useMediaQuery(theme.breakpoints.down('500'));
 
     const handleOpen = (modalForm) => {
         setForm(modalForm);
         setOpen(true);
     }
 
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setOpen(false);
+    }
 
     return (
         <div className="main-div">
@@ -46,12 +54,14 @@ const TopBar = () => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography className="fulboapp-name" variant="h6" component="div" align="left" sx={{ flexGrow: 1 }}
-                    >
+                    {!mobileMatch? 
+                    <Typography className="fulboapp-name" variant="h6" component="div" align="left" sx={{ flexGrow: 1 }}>
                         FulboApp
                     </Typography>
-                    <Button color="inherit" onClick={handleOpen}>Iniciar Sesión</Button>
-                    <Button color="inherit" onClick={handleOpen}>Registrarse</Button>
+                    :
+                    <div></div>}
+                    <Button color="inherit" onClick={() => handleOpen("login")}>Iniciar Sesión</Button>
+                    <Button color="inherit" onClick={() => handleOpen("registration")}>Registrarse</Button>
                 </Toolbar>
             </AppBar>
 
@@ -67,14 +77,14 @@ const TopBar = () => {
                 }}
             >
                 <Fade in={open}>
-                <Box sx={STYLE}>
-                    <Typography id="transition-modal-title" variant="h6" component="h2">
-                    Text in a modal
-                    </Typography>
-                    <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                    Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </Typography>
-                </Box>
+                    <Box sx={STYLE}>
+                        <Typography id="profile-login-title" variant="h6" component="h2" align="center">
+                            {modalForm === "login" ? "Iniciar sesión" : "Registrarse"}
+                        </Typography>
+                        <Typography id="login-description" sx={{ mt: 2 }}>
+                            {modalForm === "login" ? <LoginForm onClose={handleClose}/> : <RegistrationForm onClose={handleClose}/>}
+                        </Typography>
+                    </Box>
                 </Fade>
             </Modal>
         </div>
