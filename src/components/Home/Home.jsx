@@ -1,26 +1,38 @@
 import React from 'react';
 import "./Home.css";
+import { Typography, useMediaQuery } from '@mui/material';
+import { useTheme, createTheme, ThemeProvider } from '@mui/material/styles';
+import { green } from '@mui/material/colors';
+import { useNavigate } from 'react-router-dom';
+import fulboAppLogo from '../../images/IMG_5248.jpg';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import TopBar from '../TopBar/TopBar';
-import { Typography, useMediaQuery } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import fulboAppLogo from '../../images/IMG_5248.jpg';
+
+const theme = createTheme({
+    palette: {
+        primary: green,
+        secondary: green,
+    },
+});
 
 const Home = () => {
-    const theme = useTheme();
+    const screen = useTheme();
+    const mobileMatch = useMediaQuery(screen.breakpoints.down('700'));
+    const navigate = useNavigate();
 
-    const mobileMatch = useMediaQuery(theme.breakpoints.down('700'));
-
-    const handleClick = () => {
-        console.log("Clicked button")
+    const navigateToPlay = () => {
+        navigate('/play');
     }
-    
+
+    const navigateToCreate = () => {
+        navigate('/create');
+    }
 
     return (
-        <div className="main-div">
+        <div className="main-div-home">
             <TopBar />
-            <header className="hero-section">
+            <header className="hero-section-home">
             <img className="fulboapp-logo" src={fulboAppLogo} alt='FulboApp logo'></img>
             {!mobileMatch? 
                 <Typography variant="h1" sx={{mb: 6}}>
@@ -32,12 +44,14 @@ const Home = () => {
                 </Typography>
             }
             <Stack direction="row" spacing={2}>
-            <Button variant="contained" color='primary' onClick={handleClick}>
-                Quiero jugar
-            </Button>
-            <Button variant="outlined" color="secondary" onClick={handleClick}>
-                Quiero crear un partido
-            </Button>
+            <ThemeProvider theme={theme}>
+                <Button variant="contained" color="primary" onClick={navigateToPlay}>
+                    Quiero jugar
+                </Button>
+                <Button variant="outlined" color="secondary" onClick={navigateToCreate}>
+                    Quiero crear un partido
+                </Button>
+            </ThemeProvider>
             </Stack>
         </header>
         </div>

@@ -6,6 +6,7 @@ import LoginForm from './LoginForm'
 import RegistrationForm from './RegistrationForm'
 import { useTheme } from '@mui/material/styles'
 import { useMediaQuery } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 const TopBar = () => {
     const SXAPPBAR = {
@@ -29,8 +30,12 @@ const TopBar = () => {
     const [open, setOpen] = React.useState(false);
     const [modalForm, setForm] = React.useState(null);
     const theme = useTheme();
-
     const mobileMatch = useMediaQuery(theme.breakpoints.down('500'));
+    const navigate = useNavigate();
+
+    const navigateToHome = () => {
+        navigate('/');
+    }
 
     const handleMenu = () => {
 
@@ -46,7 +51,7 @@ const TopBar = () => {
     }
 
     return (
-        <div className="main-div">
+        <div className="main-div-topbar">
             <AppBar sx={SXAPPBAR}>
                 <Toolbar>
                     <IconButton
@@ -60,9 +65,14 @@ const TopBar = () => {
                         <MenuIcon />
                     </IconButton>
                     {!mobileMatch? 
-                    <Typography className="fulboapp-name" variant="h6" component="div" align="left" sx={{ flexGrow: 1 }}>
-                        FulboApp
-                    </Typography>
+                    <div className="fulboapp-name-container">
+                        <Typography
+                            className="fulboapp-name" variant="h6" component="div" align="left"
+                            sx={{ flexGrow: 1 }} onClick={navigateToHome}
+                        >
+                            FulboApp
+                        </Typography>
+                    </div>
                     :
                     <div></div>}
                     <Button color="inherit" onClick={() => handleOpen("login")}>Iniciar Sesión</Button>

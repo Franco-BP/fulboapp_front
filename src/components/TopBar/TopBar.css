@@ -1,3 +1,15 @@
-.main-div {
+.main-div-topbar {
     width: 100%;
+}
+
+.fulboapp-name-container {
+    width: 75%;
+}
+
+.fulboapp-name {
+    width: 10%;
+}
+
+.fulboapp-name:hover {
+    cursor: pointer;
 }
