@@ -32,6 +32,10 @@ const TopBar = () => {
 
     const mobileMatch = useMediaQuery(theme.breakpoints.down('500'));
 
+    const handleMenu = () => {
+
+    }
+
     const handleOpen = (modalForm) => {
         setForm(modalForm);
         setOpen(true);
@@ -51,6 +55,7 @@ const TopBar = () => {
                         color="inherit"
                         aria-label="menu"
                         sx={{mr : 2}}
+                        onClick={handleMenu}
                     >
                         <MenuIcon />
                     </IconButton>
