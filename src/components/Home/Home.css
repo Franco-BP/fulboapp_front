@@ -1,9 +1,9 @@
-.main-div {
+.main-div-home {
     min-height: 100%;
     width: 100%;
 }
 
-.hero-section {
+.hero-section-home {
     background-color: #282c34;
     min-height: 100vh;
     display: flex;
