@@ -8,6 +8,7 @@ import fulboAppLogo from '../../images/IMG_5248.jpg';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import TopBar from '../TopBar/TopBar';
+import Footer from '../Footer/Footer';
 
 const theme = createTheme({
     palette: {
@@ -32,28 +33,29 @@ const Home = () => {
     return (
         <div className="main-div-home">
             <TopBar />
-            <header className="hero-section-home">
-            <img className="fulboapp-logo" src={fulboAppLogo} alt='FulboApp logo'></img>
-            {!mobileMatch? 
-                <Typography variant="h1" sx={{mb: 6}}>
-                    FulboApp
-                </Typography>
-            :
-                <Typography variant="h2" sx={{mb: 4}}>
-                    FulboApp
-                </Typography>
-            }
-            <Stack direction="row" spacing={2}>
-            <ThemeProvider theme={theme}>
-                <Button variant="contained" color="primary" onClick={navigateToPlay}>
-                    Quiero jugar
-                </Button>
-                <Button variant="outlined" color="secondary" onClick={navigateToCreate}>
-                    Quiero crear un partido
-                </Button>
-            </ThemeProvider>
-            </Stack>
-        </header>
+            <div className="hero-section-home">
+                <img className="fulboapp-logo" src={fulboAppLogo} alt='FulboApp logo'></img>
+                {!mobileMatch? 
+                    <Typography variant="h1" sx={{mb: 6}}>
+                        FulboApp
+                    </Typography>
+                :
+                    <Typography variant="h2" sx={{mb: 4}}>
+                        FulboApp
+                    </Typography>
+                }
+                <Stack direction="row" spacing={2}>
+                <ThemeProvider theme={theme}>
+                    <Button variant="contained" color="primary" onClick={navigateToPlay}>
+                        Unirme
+                    </Button>
+                    <Button variant="outlined" color="secondary" onClick={navigateToCreate}>
+                        Crear
+                    </Button>
+                </ThemeProvider>
+                </Stack>
+            </div>
+            <Footer/>
         </div>
   )
 }

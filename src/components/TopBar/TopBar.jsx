@@ -10,8 +10,10 @@ import { useNavigate } from 'react-router-dom'
 
 const TopBar = () => {
     const SXAPPBAR = {
-        backgroundColor: "#196f3a",
-        position: "sticky"
+        // backgroundColor: "#196f3a",
+        backgroundImage: "linear-gradient(#196f3a, #282c34)",
+        position: "sticky",
+        border: "none"
     }
 
     const STYLE = {
